@@ -1,0 +1,108 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+  <div  class="listing__listing-profile-container">
+    <div class="listing__listing-profile">
+      {% if listing.image_url %}
+        <img src="{{ listing.image_url }}" alt="">
+      {% else %}
+        <img src="{% static 'auctions/placeholder.png' %}" alt="">
+      {% endif %}
+
+      <div class="listing__listing-details">
+        <h1>{{ listing.title }}</h1>
+        <p><b>Description:</b> {{ listing.description }}</p>
+        {% if listing.category %}
+          <p><b>Category:</b> {{ listing.category.title }}</p>
+        {% else %}
+          <p><b>Category:</b> No category</p>
+        {% endif %}
+
+        {% if listing.active %}
+          {% if listing.current_bid %}
+            <p><b>Current bid:</b> ${{ listing.current_bid.value|floatformat:2  }}</p>
+            <p><b>Current bid by:</b> {{ listing.last_bid_by.username }}</p>
+          {% else %}
+            <p><b>Starting bid:</b> ${{ listing.starting_bid|floatformat:2  }}</p>
+          {% endif %}
+        {% else %}
+          <p><b>Final bid:</b> ${{ listing.current_bid.value|floatformat:2  }}</p>
+          {% if listing.last_bid_by == request.user %}
+            <div style="margin-top: 20px;">
+              <span style="color: white; font-weight: bold; border-radius: 3px; padding: 5px; font-size: 1.5em;" class="bg-success">You won this auction!!! 🥳</span>
+            </div>
+          {% else %}
+            <p><b>Winner:</b> {{ listing.last_bid_by.username }}</p>
+          {% endif %}
+        {% endif %}
+        
+        {% if user.is_authenticated and listing.active %}
+          {% if listing in request.user.listings.all %}
+            {% if listing.current_bid %}
+              <form class="listing__action-form" method="post" action="{% url 'close_auction' listing.id %}">
+                {% csrf_token %}
+                <input type="submit" value="Close Auction at bid ${{ listing.current_bid.value|floatformat:2 }}" />
+              </form>
+            {% endif %}
+          {% elif listing in request.user.listing_watchlist.all %}
+            <form class="listing__action-form" method="post" action="{% url 'remove_watchlist' listing.id %}">
+              {% csrf_token %}
+              <input type="submit" value="Remove from Watchlist" />
+            </form>
+          {% else %}
+            <form class="listing__action-form" method="post" action="{% url 'add_watchlist' listing.id %}">
+              {% csrf_token %}
+              <input type="submit" value="Add to Watchlist" />
+            </form>
+          {% endif %}
+        {% endif %}
+
+        {% if listing.active %}
+            {% if not listing.created_by == request.user %}
+            
+              {% if user.is_authenticated  %}
+              <div class="listing__bidding-form-container">
+                <form method="post" action="{% url 'bid' listing.id %}" class="listing__bidding-form">
+                  {% csrf_token %}
+                  <span>$</span>
+                  {{ bidding_form.value }}
+                  <button type="submit">Bid</button>
+                </form>
+              </div>
+              {% else %}
+                <p class="mt-3 text-danger">Log in to bid this item.</p>
+              {% endif %}
+            
+            {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="listing__comments-container">
+    <h3>Comments</h3>
+    {% if user.is_authenticated %}
+      <form method="post" action="{% url 'listing' listing.id %}" class="listing__comments-form">
+        {% csrf_token %}
+        {{ comment_form }}
+        <button type="submit">Send</button>
+      </form>
+    {% else %}
+      <p>Log in to comment in this item.</p>
+    {% endif %}
+    
+    <div class="listing__comments-list">
+      {% for comment in comments %}
+      <div class="listing__comment">
+        <p>{{ comment.content }}</p>
+        <div>
+          <span>by {{ comment.user.username }}</span>
+          <span>{{ comment.datetime }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

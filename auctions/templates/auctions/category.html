@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 class="mb-4">Category: {{ category.title }}</h2>
+    {% if listings %}
+      <ul class="m-0 p-0">
+        {% for listing in listings|dictsortreversed:"date" %}
+          {% include 'snippets/listing_item.html' with listing=listing display_active=True %}
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>There are no listing for this category.</p>
+    {% endif %}
+{% endblock %}

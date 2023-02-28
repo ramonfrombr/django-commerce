@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <ul class="index__listings">
+        {% if listings %}
+            {% for listing in listings|dictsortreversed:"date" %}
+                {% include 'snippets/listing_item.html' with listing=listing %}
+            {% endfor %}
+        {% else %}
+            <p>There are no active listings</p>
+        {% endif %}
+        
+    </ul>
+{% endblock %}

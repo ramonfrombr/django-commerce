@@ -1,0 +1,11 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+
+    <ul class="index__listings">
+        {% for listing in watchlist|dictsortreversed:"date" %}
+            {% include 'snippets/listing_item.html' with listing=listing display_active=True %}
+        {% endfor %}
+    </ul>
+{% endblock %}

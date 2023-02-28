@@ -1,0 +1,216 @@
+body {
+    padding: 10px;
+}
+
+.index__listings {
+    padding: 0;
+}
+
+.listing-item__link {
+    display: flex;
+    color: black;
+    padding: 10px;
+    border: 1px solid #F0F0F0;
+    border-radius: 3px;
+    background-color: #EEEEEE;
+    margin-bottom: 5px;
+}
+
+.listing-item__link:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.listing-item__link p {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.listing-item__image {
+    width: 200px;
+    align-self: start;
+    margin-right: 20px;
+}
+
+.listing-item__title {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.listing-item__category-container {
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.listing-item__price {
+    font-size: 1.5em;
+}
+
+.listing-item__category {
+
+}
+
+.listing-item__description {
+    margin-top: 20px !important;
+    font-size: 1em;
+}
+
+.listing-item__date {
+    font-size: 1em;
+    margin-top: 20px !important;
+    color: gray;
+}
+
+.create-listing__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: lightgray;
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 1.5em;
+}
+
+.create-listing__form input {
+    margin-bottom: 20px;
+}
+
+.create-listing__form button {
+    width: fit-content;
+    padding: 0 10px;
+    margin-top: 20px;;
+}
+
+
+.listing__listing-profile-container {
+    background-color: #EEEEEE;
+}
+
+.listing__listing-profile {
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.listing__listing-profile img {
+    width: 200px;
+    align-self: start;
+    margin-right: 20px;
+}
+
+.listing__listing-details p {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.listing__bidding-form-container {
+    background-color: white;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(192, 192, 192);
+}
+
+.listing__bidding-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    margin: 0
+}
+
+.listing__bidding-form input {
+    border: none;
+}
+.listing__bidding-form button {
+    background-color: rgb(81, 81, 81);
+    color: white;
+    border: none;
+    padding: 0 10px;
+    font-weight: bold;
+    font-size: 1.3em;
+    flex: 1;
+}
+
+.listing__bidding-form span {
+    padding: 0 5px; 
+}
+
+.listing__comments-container {
+    background-color: #EEEEEE;
+    padding: 10px
+}
+
+.listing__comments-container h4 {
+    font-size: 1em;
+}
+
+.listing__comments-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.listing__comments-form input {
+    border: 1px solid lightgray;
+    font-size: 1.5em;
+    padding: 5px;
+}
+
+.listing__comments-form button {
+    max-width: fit-content;
+    border: 0;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 1.2em;
+    padding: 5px;
+}
+
+.listing__comments-list {
+}
+
+.listing__comment {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(211, 211, 211);
+    margin-bottom: 10px;
+    padding: 3px;
+}
+
+.listing__comment p {
+    font-size: 1.5em;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.listing__comment div {
+    line-height: 1;
+    color: gray;
+}
+
+.listing__comment span {
+    font-size: 1em;
+}
+
+.listing__comments {
+    
+}
+
+.listing__comments {
+    
+}
+
+.listing__action-form {
+    margin-top: 20px;
+}
+
+.listing__action-form input {
+    font-size: 10px;
+    background-color: #166af2;
+    color: white;
+    font-weight: bold;
+    border: 0;
+    font-size: 1.2em;
+}

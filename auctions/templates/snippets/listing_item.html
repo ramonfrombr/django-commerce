@@ -1,0 +1,39 @@
+{% load static %}
+
+<a  class="listing-item__link" href="{% url 'listing' listing.id %}">
+  {% if listing.image_url %}
+    <img class="listing-item__image" src="{{ listing.image_url }}" alt="">
+  {% else %}
+    <img class="listing-item__image" src="{% static 'auctions/placeholder.png' %}" alt="">
+  {% endif %}
+  
+  <div>
+    {% if display_active %}
+      {% if not listing.active %}
+      <div class="mb-3">
+        <span class="rounded p-1 bg-secondary text-white font-weight-bold">CLOSED</span>
+
+        {% if listing.last_bid_by == request.user %}
+          <span class="rounded p-1 bg-success text-white font-weight-bold">YOU WON IT</span>
+        {% endif %}
+      </div> 
+      {% endif %}
+    {% endif %}
+    <h2 class="listing-item__title mb-2">{{ listing.title }}</h2>
+      {% if listing.current_bid %}
+          <p class="listing-item__price"><b>Price:</b> ${{ listing.current_bid.value|floatformat:2 }}</p>
+      {% else %}
+          <p class="listing-item__price"><b>Price:</b> ${{ listing.starting_bid|floatformat:2 }}</p>
+      {% endif %}
+
+      {% if listing.category %}
+        <p class="listing-item__category">Category: {{ listing.category.title }}</p>
+      {% endif %}
+
+      {% if listing.description %}
+        <p class="listing-item__description">Description: {{ listing.description }}</p>
+      {% endif %}
+     
+      <p class="listing-item__date">Created at {{ listing.date }}</p>
+  </div>
+</a>
